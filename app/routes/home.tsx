@@ -18,6 +18,8 @@ export default function Home() {
         className="mx-auto"
         src="app/assets/logo.png"
         alt="침카온 로고 CCO logo"
+        width={500}
+        height={500}
       />
     </div>
   );

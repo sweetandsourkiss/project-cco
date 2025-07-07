@@ -1,13 +1,24 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Project CCO" },
+    {
+      name: "description",
+      content:
+        "침착맨 카드 온라인 홈페이지 입니다. This is the 'Calm Down Man' Card Online(CCO) website.",
+    },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <div>
+      <img
+        className="mx-auto"
+        src="app/assets/logo.png"
+        alt="침카온 로고 CCO logo"
+      />
+    </div>
+  );
 }

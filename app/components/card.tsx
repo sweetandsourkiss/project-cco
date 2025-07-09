@@ -34,7 +34,7 @@ export default function Card({
 
   const handleMouseLeave = () => {
     // 마우스가 떠나면 스프링 애니메이션을 적용하여 복귀시킵니다.
-    animate("img", { rotateX: 0, rotateY: 0 }, { type: "spring", stiffness: 350, damping: 25, mass: 0.5 });
+    animate("img", { rotateX: 0, rotateY: 0 }, { type: "spring", stiffness: 50, damping: 5, mass: 5 });
   };
 
   return (

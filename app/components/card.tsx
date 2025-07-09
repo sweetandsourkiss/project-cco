@@ -34,7 +34,7 @@ export default function Card({
 
   const handleMouseLeave = () => {
     // 마우스가 떠나면 스프링 애니메이션을 적용하여 복귀시킵니다.
-    animate("img", { rotateX: 0, rotateY: 0 }, { type: "spring", stiffness: 50, damping: 5, mass: 5 });
+    animate("img", { rotateX: 0, rotateY: 0 }, { type: "spring", stiffness: 25, damping: 5, mass: 3 });
   };
 
   return (
@@ -51,7 +51,7 @@ export default function Card({
         alt="카드 card"
         width={width}
         height={height}
-        className="rounded-xl border-2 border-black shadow-cco shadow-2xl"
+        className="rounded-xl border-2 border-black shadow-black shadow-2xl"
         // animate와 transition prop은 더 이상 필요 없습니다.
       />
     </div>

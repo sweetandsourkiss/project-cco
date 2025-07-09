@@ -1,5 +1,5 @@
 import { motion, useAnimate } from "motion/react";
-import { type MouseEvent } from "react";
+import { type MouseEvent, useRef } from "react";
 
 export default function Card({
   setCardIndex,
@@ -15,6 +15,7 @@ export default function Card({
   index: number | null;
 }) {
   const [scope, animate] = useAnimate();
+  const shineRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const hitbox = e.currentTarget;
@@ -27,19 +28,24 @@ export default function Card({
     const rotateY = (-40 / width) * x + 20;
     const rotateX = (40 / height) * y - 20;
 
-    // animate 함수를 사용해 직접 스타일을 업데이트합니다.
-    // duration: 0으로 설정하여 마우스 움직임을 즉시 반영합니다.
     animate("img", { rotateX: rotateX, rotateY: rotateY }, { duration: 0, ease: "linear" });
+
+    if (shineRef.current) {
+      shineRef.current.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.2) 0%, transparent 50%)`;
+      shineRef.current.style.opacity = "1";
+    }
   };
 
   const handleMouseLeave = () => {
-    // 마우스가 떠나면 스프링 애니메이션을 적용하여 복귀시킵니다.
-    animate("img", { rotateX: 0, rotateY: 0 }, { type: "spring", stiffness: 25, damping: 5, mass: 3 });
+    if (shineRef.current) {
+      shineRef.current.style.opacity = "0";
+    }
+    animate("img", { rotateX: 0, rotateY: 0 }, { type: "spring", stiffness: 15, damping: 10, mass: 5 });
   };
 
   return (
     <div
-      ref={scope} // useAnimate의 scope를 div에 연결합니다.
+      ref={scope}
       className="perspective-midrange"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -52,8 +58,8 @@ export default function Card({
         width={width}
         height={height}
         className="rounded-xl border-2 border-black shadow-black shadow-2xl"
-        // animate와 transition prop은 더 이상 필요 없습니다.
       />
+      <div ref={shineRef} className="card-shine-overlay" />
     </div>
   );
 }

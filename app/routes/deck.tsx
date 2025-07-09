@@ -22,11 +22,11 @@ export default function Deck() {
       <div className="flex flex-col gap-4">
         <div>
           <div className="text-center my-4 text-3xl">SSR</div>
-          <div className="flex flex-wrap justify-center gap-10">
+          <div className="flex flex-wrap justify-center gap-12">
             {Array(7)
               .fill(false)
               .map((_, i) => (
-                <Card key={i} width={210} height={300} setCardIndex={setN} url="app/assets/dummy-card.png" index={i} />
+                <Card key={i} width={315} height={450} setCardIndex={setN} url="app/assets/dummy-card.png" index={i} />
               ))}
           </div>
         </div>

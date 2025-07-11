@@ -1,18 +1,21 @@
 import { motion, useAnimate } from "motion/react";
 import { type MouseEvent, useRef } from "react";
 import backImg from "../assets/back.png";
+import { CARD_IMAGE_HEIGHT, CARD_IMAGE_WIDTH } from "~/constants/number";
 
 export default function Card({
   setCardIndex,
   width,
   height,
-  url,
+  posX,
+  posY,
   index,
 }: {
   setCardIndex?: React.Dispatch<React.SetStateAction<number | null>>;
   width: number;
   height: number;
-  url: string;
+  posX: number;
+  posY: number;
   index: number | null;
 }) {
   const [scope, animate] = useAnimate();
@@ -70,17 +73,18 @@ export default function Card({
           transformStyle: "preserve-3d",
         }}
       >
-        <motion.img
+        <motion.div
           layoutId={index + ""}
-          src={url}
-          alt="카드 card"
-          width={width}
-          height={height}
-          className="rounded-xl border-2 border-black shadow-black shadow-2xl"
           style={{
+            width,
+            height,
+            backgroundImage: `url(app/assets/cards.png)`,
+            backgroundPosition: `${posX}px ${posY}px`,
+            backgroundSize: `${CARD_IMAGE_WIDTH}px ${CARD_IMAGE_HEIGHT}px`,
             position: "absolute",
             backfaceVisibility: "hidden",
           }}
+          className="rounded-lg"
         />
         <motion.img
           src={backImg}

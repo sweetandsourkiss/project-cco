@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Route } from "./+types/home";
 import Card from "~/components/card";
 import {
@@ -28,10 +28,9 @@ export default function Deck() {
 
   return (
     <div className="px-20 py-12">
-      <div className="text-center text-6xl">덱</div>
-      <div className="flex flex-col gap-20">
+      <div className="flex flex-col gap-16">
         <div>
-          <div className="text-center my-4 text-3xl">SSR</div>
+          <div className="text-center my-4 text-4xl font-bold">SSR</div>
           <div className="flex flex-wrap justify-center gap-12">
             {CARD_POSITION_SSR.map(({ x, y }, i) => (
               <Card

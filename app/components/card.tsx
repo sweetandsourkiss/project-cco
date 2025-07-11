@@ -50,7 +50,7 @@ export default function Card({
     animate(
       ".card-flipper",
       { rotateX: 0, rotateY: 0 },
-      { type: "spring", stiffness: 50, damping: 5, mass: 1 }
+      { type: "spring", stiffness: 10, damping: 5, mass: 0.5 }
     );
   };
 
@@ -70,15 +70,7 @@ export default function Card({
         })
       }
     >
-      <motion.div
-        className="card-flipper"
-        style={{
-          width: "100%",
-          height: "100%",
-          position: "relative",
-          transformStyle: "preserve-3d",
-        }}
-      >
+      <motion.div className="card-flipper w-full h-full relative transform-3d">
         <motion.div
           layoutId={`${posX}-${posY}`}
           style={{
@@ -87,22 +79,15 @@ export default function Card({
             backgroundImage: `url(app/assets/cards.png)`,
             backgroundPosition: `${posX}px ${posY}px`,
             backgroundSize: `${CARD_IMAGE_WIDTH}px ${CARD_IMAGE_HEIGHT}px`,
-            position: "absolute",
-            backfaceVisibility: "hidden",
           }}
-          className="rounded-lg"
+          className="absolute backface-hidden rounded-lg shadow-black shadow-2xl"
         />
         <motion.img
           src={backImg}
           alt="카드 뒷면"
           width={width}
           height={height}
-          className="rounded-xl border-2 border-black shadow-black shadow-2xl"
-          style={{
-            position: "absolute",
-            backfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
-          }}
+          className="absolute backface-hidden rotate-y-180 rounded-xl border-2 border-black shadow-black shadow-2xl"
         />
       </motion.div>
       <div ref={shineRef} className="card-shine-overlay" />

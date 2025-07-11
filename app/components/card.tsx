@@ -2,21 +2,20 @@ import { motion, useAnimate } from "motion/react";
 import { type MouseEvent, useRef } from "react";
 import backImg from "../assets/back.png";
 import { CARD_IMAGE_HEIGHT, CARD_IMAGE_WIDTH } from "~/constants/number";
+import type { card_info } from "~/constants/interfaces";
 
 export default function Card({
-  setCardIndex,
+  setCardInfo,
   width,
   height,
   posX,
   posY,
-  index,
 }: {
-  setCardIndex?: React.Dispatch<React.SetStateAction<number | null>>;
+  setCardInfo?: React.Dispatch<React.SetStateAction<card_info | null>>;
   width: number;
   height: number;
   posX: number;
   posY: number;
-  index: number | null;
 }) {
   const [scope, animate] = useAnimate();
   const shineRef = useRef<HTMLDivElement>(null);
@@ -62,7 +61,14 @@ export default function Card({
       style={{ width, height }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onClick={() => setCardIndex?.(index)}
+      onClick={() =>
+        setCardInfo?.({
+          width,
+          height,
+          x: posX,
+          y: posY,
+        })
+      }
     >
       <motion.div
         className="card-flipper"
@@ -74,7 +80,7 @@ export default function Card({
         }}
       >
         <motion.div
-          layoutId={index + ""}
+          layoutId={`${posX}-${posY}`}
           style={{
             width,
             height,

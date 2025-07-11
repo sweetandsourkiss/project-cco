@@ -28,8 +28,8 @@ export default function Card({
     const x = clientX - left;
     const y = clientY - top;
 
-    const rotateY = (-40 / width) * x + 20;
-    const rotateX = (40 / height) * y - 20;
+    const rotateY = (-20 / width) * 2 * x + 10;
+    const rotateX = (20 / height) * 2 * y - 10;
 
     animate(
       ".card-flipper",
@@ -58,7 +58,7 @@ export default function Card({
     <div
       ref={scope}
       className="perspective-midrange"
-      style={{ width, height }}
+      style={{ width: width * 2, height: height * 2 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={() =>
@@ -70,9 +70,11 @@ export default function Card({
         })
       }
     >
-      <motion.div className="card-flipper w-full h-full relative transform-3d">
+      <motion.div
+        layoutId={`${posX}-${posY}`}
+        className="card-flipper w-full h-full relative transform-3d"
+      >
         <motion.div
-          layoutId={`${posX}-${posY}`}
           style={{
             width,
             height,
@@ -80,14 +82,14 @@ export default function Card({
             backgroundPosition: `${posX}px ${posY}px`,
             backgroundSize: `${CARD_IMAGE_WIDTH}px ${CARD_IMAGE_HEIGHT}px`,
           }}
-          className="absolute backface-hidden rounded-lg shadow-black shadow-2xl"
+          className="absolute backface-hidden rounded-lg shadow-black shadow-2xl scale-200 origin-top-left"
         />
         <motion.img
           src={backImg}
           alt="카드 뒷면"
-          width={width}
-          height={height}
-          className="absolute backface-hidden rotate-y-180 rounded-xl border-2 border-black shadow-black shadow-2xl"
+          width={width * 2}
+          height={height * 2}
+          className="absolute backface-hidden rotate-y-180 rounded-lg shadow-black shadow-2xl"
         />
       </motion.div>
       <div ref={shineRef} className="card-shine-overlay" />
